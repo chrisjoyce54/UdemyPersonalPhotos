@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonalPhotos.Filters;
@@ -24,6 +25,7 @@ namespace PersonalPhotos.Controllers
             _fileStorage = fileStorage;
         }
 
+		[Authorize(policy: "Editor")]
         [ServiceFilter(typeof(LoginAttribute))]
         public IActionResult Upload()
         {
